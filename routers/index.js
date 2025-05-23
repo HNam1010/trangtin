@@ -76,7 +76,11 @@ router.get('/baiviet/chitiet/:id', async (req, res) => {
 		.populate('ChuDe')
 		.populate('TaiKhoan').exec();
 	
-
+	await BaiViet.findByIdAndUpdate(id, {
+		LuotXem: bv.LuotXem + 1
+	});
+	
+	
 	//lấy 3 bài viết xem nhiều nhất
 	var xnn = await BaiViet.find({ KiemDuyet: 1})
 		.sort({ LuotXem: -1 })
